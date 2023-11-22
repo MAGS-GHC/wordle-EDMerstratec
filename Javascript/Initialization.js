@@ -35,5 +35,5 @@ async function getValidWords(file) {
   if (validWordList[validWordList.length - 1] === '') { //For some reason, last line of pulled file has a newline after last word. Pop it off to remove blank at last index
     validWordList.pop();
   }
-  wordToGuess = validWordList[Math.floor(Math.random() * validWordList.length)];
+  newGame();
 }

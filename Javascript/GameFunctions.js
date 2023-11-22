@@ -3,8 +3,6 @@ let wordInput = "";
 let round = 0;
 //validWordList defined in Initialization.js
 
-updateCurrentRound();
-
 //Enter key work kode til enterkey = 13
 const inputElements = document.querySelectorAll("input");
 inputElements.forEach((input) => {
@@ -15,7 +13,17 @@ inputElements.forEach((input) => {
     });
 });
 
-
+window.addEventListener("keydown", function (keyboardInp) {
+    if (keyboardInp.key == "Enter") {
+        checkValidWord();
+    }
+    else if (keyboardInp.key == "Backspace") {
+        console.log("remove letter function pending")
+    }
+    else if (/^[a-zA-Z]$/.test(keyboardInp.key)) {
+        console.log((keyboardInp.key).toUpperCase())
+    }
+})
 
 
 function checkWord () {
@@ -50,7 +58,7 @@ function checkValidWord () {
     if (wordInput === wordToGuess) {
         //game end
        if(confirm("Completed! Press OK to play again")){
-            restart();
+            newGame();
         }
 
     }
@@ -59,7 +67,7 @@ function checkValidWord () {
 function updateCurrentRound() {
 }
 
-function restart (){
+function newGame() {
     
     let allInputs = document.querySelectorAll("input");
     allInputs.forEach(clearInput => clearInput.value = "") 
@@ -68,5 +76,5 @@ function restart (){
     wordInput = "";
     round = 0;
     updateCurrentRound()
-    wordToGuess = validWordList[Math.floor(Math.random() * validWordList.length)];
+    wordToGuess = validWordList[Math.floor(Math.random() * validWordList.length)].toUpperCase();
 }
