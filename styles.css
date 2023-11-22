@@ -1,6 +1,6 @@
 .gridInput {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto;
   grid-template-rows: auto auto auto auto auto auto;
   gap: 10px;
   padding: 10px;
@@ -8,6 +8,16 @@
   border-style: solid;
 }
 
+.gridFiveInARow {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+
 input {
-  width: 75px;
+  width: 50px;
+  height: 50px;
+}
+
+.rowDisabled {
+  pointer-events: none;
 }

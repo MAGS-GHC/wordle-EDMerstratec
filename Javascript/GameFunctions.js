@@ -3,6 +3,8 @@ let wordInput = "";
 let round = 0;
 //validWordList defined in Initialization.js
 
+updateCurrentRound()
+
 //Enter key work kode til enterkey = 13
 const inputElements = document.querySelectorAll("input");
 inputElements.forEach((input) => {
@@ -34,11 +36,13 @@ function checkWord () {
 function checkValidWord () {
     wordInput = "";
     for (let i=0; i<5; i++) { //assemble to one word
-        wordInput += document.getElementById("row" + round + "column" + i).value;
+        wordInput += document.getElementById("row" + round + "column" + i).value.toLowerCase();
     }
-    if (wordInput.length === 5 && /^[a-zA-Z]*$/.test(wordInput)) { 
+    if (wordInput.length === 5 && /^[a-zA-Z]*$/.test(wordInput) && validWordList.includes(wordInput)) { 
+        //redundant checks for length and letters only, but perhaps performance from checking left to right?
         checkWord ();
         round++;
+        updateCurrentRound();
     }
     else {
         alert("Not Valid?")
@@ -52,6 +56,9 @@ function checkValidWord () {
     }
 }
 
+function updateCurrentRound() {
+}
+
 function restart (){
     
     let allInputs = document.querySelectorAll("input");
@@ -60,5 +67,6 @@ function restart (){
     wordToGuess = "";
     wordInput = "";
     round = 0;
+    updateCurrentRound()
     wordToGuess = validWordList[Math.floor(Math.random() * validWordList.length)];
 }
