@@ -3,7 +3,7 @@ let wordInput = "";
 let round = 0;
 //validWordList defined in Initialization.js
 
-updateCurrentRound()
+updateCurrentRound();
 
 //Enter key work kode til enterkey = 13
 const inputElements = document.querySelectorAll("input");
