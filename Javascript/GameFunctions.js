@@ -8,7 +8,6 @@ const wordLength = 5;
 //listen to keyboard input
 window.addEventListener("keydown", function (keyboardInp) {
     if (round > 5) {
-        gameEndPrompt();
         return;
     }
     if (keyboardInp.key == "Enter") {
@@ -18,7 +17,6 @@ window.addEventListener("keydown", function (keyboardInp) {
         currentLetter--;
         wordInput = wordInput.slice(0,-1);
         document.getElementById("row" + round + "column" + currentLetter).value = "";
-        console.log(wordInput)
     }
     else if (currentLetter < wordLength && /^[a-zA-Z]$/.test(keyboardInp.key)) {
         wordInput += (keyboardInp.key).toUpperCase();
@@ -42,7 +40,6 @@ function compareWords() {
         else {
             document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "grey"
         }
-        console.log(wordToGuessTemp);
     }
 }
 
@@ -50,13 +47,13 @@ function compareWords() {
 function checkValidWord () {
     if (validWordList.includes(wordInput.toLowerCase())) { 
         compareWords();
-        updateCurrentRound();
         if (wordInput === wordToGuess) {
            youWin();
         }
+        else {updateCurrentRound();}
     }
     else {
-        alert("Word not recognized")
+        document.getElementById("gameStateMessage").innerText = "Word not recognized!"
     }
 }
 
@@ -64,14 +61,21 @@ function updateCurrentRound() {
     wordInput = "";
     currentLetter = 0;
     round++;
+    if (round>5) {
+        gameEndPrompt();
+    }
+    else {
+        document.getElementById("gameStateMessage").innerText = "Round " + (round+1) + "! Guess!";
+    }
 }
 
 function gameEndPrompt() {
-    console.log("GameEndTrigger")
+    document.getElementById("gameStateMessage").innerText = "No more guesses! The word was: " + wordToGuess + "!";
 }
 
 function youWin() {
-    alert("You win WIP")
+    document.getElementById("gameStateMessage").innerText = "A winner is you!";
+    round = 6;
 }
 
 function newGame() {
@@ -83,4 +87,5 @@ function newGame() {
     round = 0;
     currentLetter = 0;
     wordToGuess = validWordList[Math.floor(Math.random() * validWordList.length)].toUpperCase();
+    document.getElementById("gameStateMessage").innerText = "Guess the word!";
 }

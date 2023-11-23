@@ -1,8 +1,6 @@
 
 
 Goals:
-Victory message not alert/confirm
-Change "word not recognized" message from alert
 
 
 Optionals:
