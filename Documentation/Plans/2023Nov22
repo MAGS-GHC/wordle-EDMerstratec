@@ -1,7 +1,0 @@
-
-
-Goals:
-Disable inputs
-
-Optionals:
-Change init function to batch DOM updates. Class/this?

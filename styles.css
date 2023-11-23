@@ -14,7 +14,7 @@
 }
 
 .gridFiveInARow {
-  opacity: 0.5;
+  opacity: 0.8;
   display: grid;
   grid-template-columns: auto auto auto auto auto;
 }
@@ -25,6 +25,3 @@ input {
   text-align: center;
 }
 
-.rowDisabled {
-  pointer-events: none;
-}

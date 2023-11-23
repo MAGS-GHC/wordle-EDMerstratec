@@ -1,0 +1,14 @@
+
+
+Goals:
+Don't double-count as yellow, unless word actually has two of the letter
+Show incorrect letters more clearly
+Victory message not alert/confirm
+Change "word not recognized" message from alert
+
+
+Optionals:
+Change init function to batch DOM updates. Class/this?
+rewrite checkWord(). Possibly batch DOM
+Change new game button to give up + failure message? auto new on win?
+Add CSS animations for letter update + round check? Win/lose?

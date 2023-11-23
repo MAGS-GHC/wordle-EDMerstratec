@@ -15,8 +15,8 @@ function createInputBoxes(rowsTotal,columnsTotal) {
             //batchRows.push(createDiv);
     for (let column=0; column<columnsTotal; column++) {
       let inputBox = document.createElement("input");
-      inputBox.value = "row" + row + "column" + column;
       inputBox.id = "row" + row + "column" + column;
+      inputBox.disabled = true;
       //batchColumns.push(inputBox);
       document.getElementById("RowID" + row).appendChild(inputBox);
         }
@@ -26,9 +26,8 @@ function createInputBoxes(rowsTotal,columnsTotal) {
 }
 //interesting observations: "let inputBox" will not append multiple times if defined outside of the scope of either loop or function. In that case, only the last iteration stays appended
 
-
 async function getValidWords(file) {
-  let myObject = await fetch(file);
+  myObject = await fetch(file);
   let myText = await myObject.text();
   validWordList = myText.split('\n');
   if (validWordList[validWordList.length - 1] === '') { //For some reason, last line of pulled file has a newline after last word. Pop it off to remove blank at last index
