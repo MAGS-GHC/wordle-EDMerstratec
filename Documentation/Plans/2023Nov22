@@ -1,9 +1,7 @@
 
 
 Goals:
-Nicer display
-lock out wrong-round inputs
+Disable inputs
 
 Optionals:
-Keypress directly to input field
 Change init function to batch DOM updates. Class/this?

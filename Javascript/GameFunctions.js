@@ -22,10 +22,10 @@ window.addEventListener("keydown", function (keyboardInp) {
         currentLetter++;
     }
 })
-
+//inputElement.disabled = true; 
 
 function checkWord () {
-    for (let i = 0; i<5; i++) {
+    for (let i = 0; i<wordLength; i++) {
         if (wordToGuess[i] === wordInput[i]) {
             document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "green"
         }
@@ -36,7 +36,6 @@ function checkWord () {
             document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "grey"
         }
     }
-    wordInput = "";
 }
 
 
@@ -44,16 +43,16 @@ function checkValidWord () {
     if (validWordList.includes(wordInput.toLowerCase())) { 
         checkWord ();
         updateCurrentRound();
+        if (wordInput === wordToGuess) {
+           if(confirm("Completed! Press OK to play again")){
+                newGame();
+            }
+    
+        }
+        wordInput = "";
     }
     else {
         alert("Word not recognized")
-    }
-    if (wordInput === wordToGuess) {
-        //game end
-       if(confirm("Completed! Press OK to play again")){
-            newGame();
-        }
-
     }
 }
 
