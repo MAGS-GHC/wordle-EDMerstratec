@@ -1,8 +1,8 @@
 .gridInput {
   display: grid;
   grid-template-columns: 300px;
-  min-width: 500px;
-  max-width: 750px;
+  min-width: 400px;
+  max-width: 675px;
   grid-template-rows: auto auto auto auto auto auto;
   border-style: solid;
   gap: 10px;
@@ -19,9 +19,16 @@
   grid-template-columns: auto auto auto auto auto;
 }
 
+.restartButton {
+  width: 50px;
+  height: 50px;
+}
+
 input {
   width: 50px;
   height: 50px;
   text-align: center;
+  font-size: x-large;
+  font-weight: bolder;
+  background-color: lightgray;
 }
-

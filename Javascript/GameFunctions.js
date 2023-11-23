@@ -7,6 +7,10 @@ const wordLength = 5;
 
 //listen to keyboard input
 window.addEventListener("keydown", function (keyboardInp) {
+    if (round > 5) {
+        gameEndPrompt();
+        return;
+    }
     if (keyboardInp.key == "Enter") {
         checkValidWord();
     }
@@ -22,34 +26,34 @@ window.addEventListener("keydown", function (keyboardInp) {
         currentLetter++;
     }
 })
-//inputElement.disabled = true; 
 
-function checkWord () {
-    for (let i = 0; i<wordLength; i++) {
-        if (wordToGuess[i] === wordInput[i]) {
-            document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "green"
-        }
-        else if (wordInput[i] === wordToGuess[0] || wordInput[i] === wordToGuess[1] || wordInput[i] === wordToGuess[2] || wordInput[i] === wordToGuess[3] || wordInput[i] === wordToGuess[4]) {
-            document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "yellow"
+function compareWords() {
+    let wordToGuessTemp = wordToGuess;
+    for (let i=0; i<wordLength; i++) {
+        if (wordToGuessTemp.includes(wordInput[i])) {
+            if (wordToGuess[i] === wordInput[i]) {
+                document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "green"
+            }
+            else {
+                document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "yellow"
+            }
+            wordToGuessTemp = wordToGuessTemp.replace(wordInput[i], "!");
         }
         else {
             document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "grey"
         }
+        console.log(wordToGuessTemp);
     }
 }
 
 
 function checkValidWord () {
     if (validWordList.includes(wordInput.toLowerCase())) { 
-        checkWord ();
+        compareWords();
         updateCurrentRound();
         if (wordInput === wordToGuess) {
-           if(confirm("Completed! Press OK to play again")){
-                newGame();
-            }
-    
+           youWin();
         }
-        wordInput = "";
     }
     else {
         alert("Word not recognized")
@@ -57,12 +61,20 @@ function checkValidWord () {
 }
 
 function updateCurrentRound() {
+    wordInput = "";
     currentLetter = 0;
     round++;
 }
 
+function gameEndPrompt() {
+    console.log("GameEndTrigger")
+}
+
+function youWin() {
+    alert("You win WIP")
+}
+
 function newGame() {
-    
     let allInputs = document.querySelectorAll("input");
     allInputs.forEach(clearInput => clearInput.value = "") 
     allInputs.forEach(clearInput => clearInput.style.backgroundColor = "");
