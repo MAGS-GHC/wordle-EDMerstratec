@@ -1,27 +1,25 @@
 let wordToGuess;
 let wordInput = "";
 let round = 0;
+let currentLetter = 0;
+const wordLength = 5;
 //validWordList defined in Initialization.js
 
-//Enter key work kode til enterkey = 13
-const inputElements = document.querySelectorAll("input");
-inputElements.forEach((input) => {
-    input.addEventListener("keyup", (e) => {
-        if (e.keyCode === 13) {
-            checkValidWord();
-        }
-    });
-});
-
+//listen to keyboard input
 window.addEventListener("keydown", function (keyboardInp) {
     if (keyboardInp.key == "Enter") {
         checkValidWord();
     }
-    else if (keyboardInp.key == "Backspace") {
-        console.log("remove letter function pending")
+    else if (keyboardInp.key == "Backspace" && currentLetter != 0) {
+        currentLetter--;
+        wordInput = wordInput.slice(0,-1);
+        document.getElementById("row" + round + "column" + currentLetter).value = "";
+        console.log(wordInput)
     }
-    else if (/^[a-zA-Z]$/.test(keyboardInp.key)) {
-        console.log((keyboardInp.key).toUpperCase())
+    else if (currentLetter < wordLength && /^[a-zA-Z]$/.test(keyboardInp.key)) {
+        wordInput += (keyboardInp.key).toUpperCase();
+        document.getElementById("row" + round + "column" + currentLetter).value = (keyboardInp.key).toUpperCase();
+        currentLetter++;
     }
 })
 
@@ -38,22 +36,17 @@ function checkWord () {
             document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "grey"
         }
     }
+    wordInput = "";
 }
 
 
 function checkValidWord () {
-    wordInput = "";
-    for (let i=0; i<5; i++) { //assemble to one word
-        wordInput += document.getElementById("row" + round + "column" + i).value.toLowerCase();
-    }
-    if (wordInput.length === 5 && /^[a-zA-Z]*$/.test(wordInput) && validWordList.includes(wordInput)) { 
-        //redundant checks for length and letters only, but perhaps performance from checking left to right?
+    if (validWordList.includes(wordInput.toLowerCase())) { 
         checkWord ();
-        round++;
         updateCurrentRound();
     }
     else {
-        alert("Not Valid?")
+        alert("Word not recognized")
     }
     if (wordInput === wordToGuess) {
         //game end
@@ -65,6 +58,8 @@ function checkValidWord () {
 }
 
 function updateCurrentRound() {
+    currentLetter = 0;
+    round++;
 }
 
 function newGame() {
@@ -75,6 +70,6 @@ function newGame() {
     wordToGuess = "";
     wordInput = "";
     round = 0;
-    updateCurrentRound()
+    currentLetter = 0;
     wordToGuess = validWordList[Math.floor(Math.random() * validWordList.length)].toUpperCase();
 }
