@@ -4,25 +4,18 @@ createInputBoxes(6,5);
 getValidWords("https://gist.githubusercontent.com/dracos/dd0668f281e685bad51479e5acaadb93/raw/6bfa15d263d6d5b63840a8e5b64e04b382fdb079/valid-wordle-words.txt");
 
 function createInputBoxes(rowsTotal,columnsTotal) {
-  //let batchRows = [];
-  //let batchColumns = [];
   for (let row=0; row<rowsTotal; row++){
     let createDiv = document.createElement("div");
     createDiv.id = "RowID" + row;
     createDiv.classList.add("gridFiveInARow");
-        //createDiv.classList.add("rowDisabled");
     document.getElementById("GridInput").appendChild(createDiv)
-            //batchRows.push(createDiv);
     for (let column=0; column<columnsTotal; column++) {
       let inputBox = document.createElement("input");
       inputBox.id = "row" + row + "column" + column;
       inputBox.disabled = true;
-      //batchColumns.push(inputBox);
       document.getElementById("RowID" + row).appendChild(inputBox);
         }
     }
-    //document.body.append(...batchRows);
-    //document.body.append(...batchColumns);
 }
 //interesting observations: "let inputBox" will not append multiple times if defined outside of the scope of either loop or function. In that case, only the last iteration stays appended
 
