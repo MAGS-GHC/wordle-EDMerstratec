@@ -28,21 +28,21 @@ window.addEventListener("keydown", function (keyboardInp) {
 function compareWords() {
     let wordToGuessTemp = wordToGuess;
     for (let i=0; i<wordLength; i++) {
-        if (wordToGuessTemp.includes(wordInput[i])) {
-            if (wordToGuess[i] === wordInput[i]) {
-                document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "green"
-            }
-            else {
-                document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "yellow"
-            }
+        if (wordToGuess[i] === wordInput[i]) {
+            document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "green"
             wordToGuessTemp = wordToGuessTemp.replace(wordInput[i], "!");
         }
-        else {
+    }
+    for (let i=0; i<wordLength; i++) {
+        if (wordToGuessTemp.includes(wordInput[i])) {
+            document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "yellow";
+            wordToGuessTemp = wordToGuessTemp.replace(wordInput[i], "!");
+        }
+        else if (wordToGuessTemp[i] != "!") {
             document.getElementById("row"+ round + "column" + (i)).style.backgroundColor = "grey"
         }
     }
 }
-
 
 function checkValidWord () {
     if (validWordList.includes(wordInput.toLowerCase())) { 
